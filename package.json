@@ -1,0 +1,19 @@
+{
+  "name": "babiesquestionsapp",
+  "version": "1.0.0",
+  "description": "Questions from babies/kiddies",
+  "main": "mainServer.js",
+  "directories": {
+    "start": "node mainServer.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shannon Callahan",
+  "license": "ISC"
+}
