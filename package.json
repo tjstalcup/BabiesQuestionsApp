@@ -15,9 +15,7 @@
   "devDependencies": {
     "chai-http": "^4.2.0"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+
   "author": "Shannon Callahan",
   "license": "ISC"
 }
