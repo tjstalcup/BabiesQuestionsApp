@@ -1,4 +1,9 @@
 language: node_js
 node_js: node
-# services:
-# - mongodb
+deploy: evening-wave-91131
+  provider: heroku
+  api_key:
+    secure: VdMdVpxcNv3GktRczB7phMPgLhE1JZ/i0foIWzYfwcys/v3hV8t9K8/D3HozJ4D5bp8vsPFPe6DDvq2m8RPts1vvh40fgRUItoIQJ03CRvcsl6rO3VQ8+TGMCe+d2a5+Kqq92v5apU0lax0T9stZm+JOYZKUgNYoEJoLia7KpyYXwFmXKWwrEz9tgUYHy+pFu06EfozwhwK1J0qEI+Jd5wyeAwM7IM7LhEdsvLwxf/mi/TyE3InAE2mo4wuZcub6JdJLxsvxgLk6+EXEpDFtHkZBoi70YgTHJqv852ygC8QjssKdesvA+JbJrZira9WLC03RJy13jRFoQOuo6YTV4pBwTz2pMwgTvu7zJ5k9iDbyG0kblfof/BIf0VB2K/x6xjLWMA+cdENnc2lxrIp/KQM0uT6O/ANxk8kjqZeKeDiJzAe7uoCQVWliBTksCc0PA+fbvivjX+U1KUSngslqigKU4xxOcj1UR6jxoUYCdbxD0KOyCMled3qG0xnQGg5pZ+68v6cjPlmZGxkwJD7UBNQuVS9MsJD/5Xz+XWSV/O1gJjaS5lHU3i4Y68RLakUMCfaKDN+1Ie5cDgMMAb5rJZPK53Ywor4Lqcvw7Re+vM+zzR8oc/EHk7kKPf7QtjJQDywDhzDw3NUrZp2sTxoEw+sgEP8WEU6miVizXypCBVk=
+  app: evening-wave-91131
+  on:
+    repo: SCallahan101/BabiesQuestionsApp
