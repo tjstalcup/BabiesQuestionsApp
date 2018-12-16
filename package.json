@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Questions from babies/kiddies",
   "main": "mainServer.js",
-  "directories": {
+  "scripts": {
     "start": "node mainServer.js",
     "test": "mocha"
   },
@@ -15,7 +15,6 @@
   "devDependencies": {
     "chai-http": "^4.2.0"
   },
-
   "author": "Shannon Callahan",
   "license": "ISC"
 }
