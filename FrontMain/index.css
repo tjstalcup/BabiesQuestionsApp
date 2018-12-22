@@ -2,3 +2,11 @@ body * {
   margin: 0;
   padding: 0;
 }
+
+.box-login {
+  border: solid blue;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+}
