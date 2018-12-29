@@ -65,11 +65,25 @@ $(function(){
 // $(test());
 
 function enterMainPage() {
-  $('#entrySubmit').click(function(event){
+  $('#entrySubmit').click(function(e){
+    e.preventDefault();
     $('.container').html(
-      `<nav></nav>
+      `<nav>
+        <div class='navBoxA'>General Questions</div>
+        <div class='navBoxB'>Daughter Questions</div>
+        <div class='navBoxC'>Son Questions</div>
+        <div class='navBoxD'>3-6 years old kids' Questions</div>
+        <div class='navBoxE'>6-10 years old kids' Questions</div>
+        <div class='navBoxF'>FAQs</div>
+        <div class='navBoxG'>Suggestions</div>
+       </nav>
        <section>
-        <div class='post-user'></div>
+        <h3>Your Operation Center</h3>
+        <p>Post:</p>
+        <p>By:</p>
+        <p>${Date}</p>
+        <div class='post-user'>
+        </div>
         Put your comment below here:
         <br>
         <input type='textarea'>
@@ -78,25 +92,35 @@ function enterMainPage() {
   });
     console.log('entered the main page successful');
   }
-
+// <p> ${data.post[index].question} </p>
   $(enterMainPage());
-  
-//   function profileCreation() {
-//     $(.container).html(
-//       `<form>
-//         <fieldset>
-//           <legend>Profile Builder</legend>
-//           First Name: <input type='text'>
-//           Last Name: <input type='text'>
-//           Email: <input type='text'>
-//           Date of Birth: <input type='text'>
-//           Username: <input type='text'>
-//           Password: <input type='text'>
-//         </fieldset>
-//       </form>
-//       `
-//     )
-//   }
+
+  function profileCreation() {
+    $('#signUp').click(function(e) {
+      e.preventDefault
+      $('.container').html(
+        `<form>
+          <fieldset>
+            <legend>Profile Builder</legend>
+            First Name: <input type='text'>
+            <br>
+            Last Name: <input type='text'>
+            <br>
+            Email: <input type='text'>
+            <br>
+            Date of Birth: <input type='text'>
+            <br>
+            Username: <input type='text'>
+            <br>
+            Password: <input type='text'>
+            <br>
+            <input type='button' value='Finalize the profile'>
+          </fieldset>
+        </form>`
+      )
+    });
+  }
+  $(profileCreation());
 //   MVP
 // -Create User Posts
 // -Create User profile
