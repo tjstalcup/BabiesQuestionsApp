@@ -1,8 +1,8 @@
-npm i{
+{
   "name": "babiesquestionsapp",
   "version": "1.0.0",
   "description": "Questions from babies/kiddies",
-  "main": "mainServer.js",
+  "main": "index.js",
   "scripts": {
     "start": "node mainServer.js",
     "test": "mocha"
@@ -17,6 +17,7 @@ npm i{
   "devDependencies": {
     "chai-http": "^4.2.0"
   },
+  "keyword": [],
   "author": "Shannon Callahan",
   "license": "ISC"
 }

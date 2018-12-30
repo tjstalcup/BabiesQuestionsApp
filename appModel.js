@@ -1,6 +1,6 @@
 "use strict"
 
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const uuid = require('uuid/v4');
 
 const childQuestionSchema = mongoose.Schema({
@@ -14,6 +14,10 @@ const childQuestionSchema = mongoose.Schema({
     childAge: Number,
     foundAnswer: String
   },
-  id: uuid
+  // id: uuid
 // save later
 })
+
+const QuestionBoard = mongoose.model("QuestionBoard", childQuestionSchema);
+
+module.exports = {QuestionBoard};

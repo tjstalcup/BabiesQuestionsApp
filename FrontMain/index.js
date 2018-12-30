@@ -87,17 +87,19 @@ function enterMainPage() {
         Put your comment below here:
         <br>
         <input type='textarea'>
-       </section>`
-      )
+       </section>
+       <input id='reportButton' type='button' value='REPORT ISSUE'>`
+     );
   });
     console.log('entered the main page successful');
+    $(reportIssue());
   }
 // <p> ${data.post[index].question} </p>
   $(enterMainPage());
 
   function profileCreation() {
     $('#signUp').click(function(e) {
-      e.preventDefault
+      e.preventDefault();
       $('.container').html(
         `<form>
           <fieldset>
@@ -117,14 +119,31 @@ function enterMainPage() {
             <input type='button' value='Finalize the profile'>
           </fieldset>
         </form>`
-      )
+      );
     });
   }
   $(profileCreation());
+
+  function reportIssue() {
+    $('#reportButton').click(function(e){
+      e.preventDefault();
+      $('.container').html(`
+        <h2>Report Issue Page</h2>
+        <section>
+          <p>Please share your concern regarding anything in this site</p>
+          <form>
+            <input type='text' value='please type down here'>
+          </form>
+        </section>
+        `);
+    });
+  }
+
+
 //   MVP
-// -Create User Posts
-// -Create User profile
-// -Create the account creation
+// -Create User Posts - kinda
+// -Create User profile - need polish
+// -Create the account creation - need to set connection
 // After MVP
 // -Create download kids pics
 // -Create Error message
