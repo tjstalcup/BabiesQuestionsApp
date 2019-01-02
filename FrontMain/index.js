@@ -69,15 +69,17 @@ function enterMainPage() {
     e.preventDefault();
     $('.container').html(
       `<nav>
-        <div class='navBoxA'>General Questions</div>
-        <div class='navBoxB'>Daughter Questions</div>
-        <div class='navBoxC'>Son Questions</div>
-        <div class='navBoxD'>3-6 years old kids' Questions</div>
-        <div class='navBoxE'>6-10 years old kids' Questions</div>
-        <div class='navBoxF'>FAQs</div>
-        <div class='navBoxG'>Suggestions</div>
+        <ul id='nav'>
+          <li class='navBox-A'>General Questions</li>
+          <li class='navBox-B'>Daughter Questions</li>
+          <li class='navBox-C'>Son Questions</li>
+          <li class='navBox-D'>3-6 years old kids' Questions</li>
+          <li class='navBox-E'>6-10 years old kids' Questions</li>
+          <li class='navBox-F'>FAQs</li>
+          <li class='navBox-G'>Suggestions</li>
+        </ul>
        </nav>
-       <section>
+       <section id='secondaryContainer'>
         <h3>Your Operation Center</h3>
         <p>Post:</p>
         <p>By:</p>
@@ -92,7 +94,7 @@ function enterMainPage() {
      );
   });
     console.log('entered the main page successful');
-    $(reportIssue());
+    // $(reportIssue());
   }
 // <p> ${data.post[index].question} </p>
   $(enterMainPage());
@@ -116,7 +118,7 @@ function enterMainPage() {
             <br>
             Password: <input type='text'>
             <br>
-            <input type='button' value='Finalize the profile'>
+            <input id='createdProfile' type='button' value='Finalize the profile'>
           </fieldset>
         </form>`
       );
@@ -127,7 +129,7 @@ function enterMainPage() {
   function reportIssue() {
     $('#reportButton').click(function(e){
       e.preventDefault();
-      $('.container').html(`
+      $('#secondaryContainer').html(`
         <h2>Report Issue Page</h2>
         <section>
           <p>Please share your concern regarding anything in this site</p>
@@ -138,7 +140,14 @@ function enterMainPage() {
         `);
     });
   }
+$(reportIssue());
 
+function backToMainPage() {
+  $('#createdProfile').click(function(e){
+    e.preventDefault();
+    $(enterMainPage());
+  });
+}
 
 //   MVP
 // -Create User Posts - kinda

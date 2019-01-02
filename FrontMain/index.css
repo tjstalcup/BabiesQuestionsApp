@@ -10,3 +10,13 @@ footer {
   position: absolute;
   bottom: 0;
 }
+#nav {
+  border: solid red;
+  height: 70px;
+}
+li {
+  display: inline-block;
+  border: solid purple;
+  margin-right: -4px;
+  padding: 5px 10px;
+}
