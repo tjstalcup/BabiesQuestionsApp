@@ -7,6 +7,6 @@ deploy: evening-wave-91131
   app: evening-wave-91131
   on:
     repo: SCallahan101/BabiesQuestionsApp
-deploy:
-  on:
-    branch: feature/mvp3.0
+# deploy:
+#   on:
+#     branch: feature/mvp3.0
