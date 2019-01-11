@@ -1,181 +1,137 @@
-'use strict'
+"use strict";
 
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+// const bodyParser = require("body-parser");
 
 mongoose.Promise = global.Promise;
 
-const {DATABASE_URL, PORT} = require('./config');
-const {QuestionBoard} = require('./appModel');
+const { PORT, DATABASE_URL} = require("./config");
+const { QuestionBoard } = require("./appModel");
 
-// const jsonParser = bodyParser.json();
 const app = express();
-
-app.use(morgan('common'));
 app.use(express.json());
+// app.use(bodyParser.json());
+
 app.use(express.static('FrontMain'));
 
-// ========================CRUD process down here============================
-// -GET
-app.get('/questionPost', (req, res) => {
-  QuestionBoard
-    .find()
-    .then(posts => {
-      // res.json or res.html?
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'Something went wrong with GET process'});
+app.get("/questionPost", (req, res) => {
+  QuestionBoard.find()
+  .limit(8)
+  .then(questionPosts => {
+    res.json({
+      questionPosts: questionPosts.map(questionPost => questionPost.serialize())
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ message: "Something happened from app.get area"});
   });
 });
-app.get('/questionPost/:id', (req, res) => {
+
+app.get("/questionPost/:id", (req, res) => {
   QuestionBoard
-    findById(req.params.id)
-    .then(post => res.json(post.serialize()))
+    .findById(req.params.id)
+    .then(questionPost => res.json(questionPost.serialize()))
     .catch(err => {
       console.error(err);
-      res.status(500).json({error: 'Something went wrong with GET:ID process'});
+      res.status(500).json({message: "Something happened from app.get:id area"});
     });
 });
-// -POST
-app.post('/questionPost', (req, res) => {
-  const requiredFields = ['parentName', 'title'];
-  for (let i=0; i<requiredFields.length; i++) {
-    const field = requiredFields[i];
-    if(!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`;
+
+app.post("/questionPost", (req, res) => {
+  const requiredInputs = ["parentName", "title"];
+  for (let i=0; i< requiredInputs.length; i++) {
+    const input = requiredInputs[i];
+    if(!(input in req.body)) {
+      const message = `Missing \`${input}\` in request body`;
       console.error(message);
       return res.status(400).send(message);
     }
   }
-  QuestionBoard
-    .create({
-      parentName: req.body.parentName,
-      title: req.body.title
-    })
-    .then(question => res.status(201).json(question.serialize()))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'Something went wrong with POST section'});
-    });
+  QuestionBoard.create({
+    parentName: req.body.parentName,
+    title: req.body.title,
+    zipcode: req.body.zipcode,
+    question: req.body.question
+  })
+  .then(questionPost => res.status(201).json(questionPost.serialize()))
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ message: "Something happened in app.post area"});
+  });
 });
-app.delete('/questionPost/:id', (req, res) => {
-  QuestionBoard
-    .findByIdandRemove(req.params.id)
-    .then(() => {
-      res.status(204).json({ message: 'sucessfully deleted post'});
-    })
-    .catch(err => {
-      res.status(500).json({error: 'Something went wrong with POST-delete id section'});
-    });
-});
-// -PUT
-app.put('/questionPost/:id', (req, res) => {
+
+app.put("/questionPost/:id", (req, res) => {
   if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    res.status(400).json({
-      error: 'Request path id and request body id values must be match'
-    });
+    const message =
+    `Request path id (${req.params.id}) and request body id` + `(${req.body.id}) must match`;
+    console.error(message);
+    return res.status(400).json({message: message});
   }
-  const updated = {};
-  // const updatedFields = []; - Need to revisit on what's updateable and what's not
-  updatedFields.forEach(field => {
-    if(field in req.body) {
-      updated[field] = req.body[field];
+  const toUpdate = {};
+  const updateableInputs = ["parentName", "title", "zipcode", "question"];
+
+  updateableInputs.forEach(input => {
+    if (input in req.body) {
+      toUpdate[input] = req.body[input];
     }
   });
   QuestionBoard
-    .findByIdandUpdate(req.params.id, {$set: updated}, {new: true})
-    .then(updatedPost => res.status(204).end())
-    .catch(err => res.status(500).json({message: 'Something went wrong with second part of POST ID'}));
-  });
-// -DELETE
-app.delete('/:id', (req, res) => {
-  QuestionBoard
-    .findByIdandRemove(req.params.id)
-    .then(() => {
-      console.log(`Deleted question post with id \`${req.params.id}\``);
-      res.status(204).end();
-    });
+    .findByIdandUpdate(req.params.id, {$set: toUpdate})
+    .then(questionPost => res.status(204).end())
+    .catch(err => res.status(500).json({message: "Something happened in app.put area"}));
 });
-app.use('*', function (req, res) {
-  res.status(404),json({message: 'Not Found'});
+
+app.delete("/questionPost/:id", (req, res) => {
+  QuestionBoard.findByIdandRemove(req.params.id)
+  .then(questionPost => res.status(204).end())
+  .catch(err => res.status(500).json({message: "Something happened in app.delete area"}));
 });
-// =============================================================================
-//=============================RUN SERVER=======================================
+
+app.use("*", function(req, res) {
+  res.status(404).json({message: "Not Found"});
+});
+
 let server;
-function runServer(port = PORT) {
+
+function runServer(databaseUrl, port = PORT) {
   return new Promise((resolve, reject) => {
-    server = app
-      .listen(port, () => {
-        console.log(`Your app is listening on this port ${port}`);
-        resolve(server);
-      })
-      .on('error', err => {
-        reject(err);
-      });
+    mongoose.connect(
+      databaseUrl,
+      { useNewUrlParser: true },
+      err => {
+        if (err) {
+          return reject(err);
+        }
+        server = app
+          .listen(port, () => {
+            console.log(`Your app is listening on port ${port}`);
+            resolve();
+        })
+        .on("error", err => {
+          mongoose.disconnect();
+          reject(err);
+        });
+      }
+    );
   });
 }
+
 function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log("closing server");
-    server.close(err => {
-      if(err) {
-        reject(err);
-        return;
-      }
-      resolve();
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log("Closing server");
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
     });
   });
 }
-
-// https://stackoverflow.com/questions/50448272/avoid-current-url-string-parser-is-deprecated-warning-by-setting-usenewurlpars
-// function runServer(databaseUrl, port = PORT) {
-//   return new Promise((resolve, reject) => {
-//     mongoose.connect(
-//       databaseUrl,
-//       err => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         server = app
-//           .listen(port, () => {
-//             console.log(`Your app is listening on port ${port}`);
-//             resolve();
-//           })
-//           .on("error", err => {
-//             mongoose.disconnect();
-//             reject(err);
-//           });
-//       }
-//     );
-//   });
-// }
-//
-// function closeServer() {
-//   return mongoose.disconnect().then(() => {
-//     return new Promise(() => {
-//       console.log("Closing server");
-//       server.close(err => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         resolve();
-//       });
-//     });
-//   });
-// }
-//==============================================================================
-
 if(require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
-
-// if(require.main === module) {
-//     app.listen(process.env.PORT || 4747, function() {
-//       console.info(`App is listening on ${this.address().port}`);
-//     });
-// }
-
-module.exports = {app, runServer, closeServer};
+module.exports = { app, runServer, closeServer};

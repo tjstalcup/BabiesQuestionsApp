@@ -1,5 +1,7 @@
 language: node_js
 node_js: node
+services:
+- mongod
 deploy: evening-wave-91131
   provider: heroku
   api_key:
