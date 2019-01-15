@@ -16,11 +16,13 @@ app.use(express.json());
 app.use(express.static('FrontMain'));
 
 app.get("/questionPost", (req, res) => {
-  QuestionBoard.find()
-  .limit(8)
+  QuestionBoard
+  .find()
+  // .limit(8)
   .then(questionPosts => {
     res.json({
-      questionPosts: questionPosts.map(questionPost => questionPost.serialize())
+      questionPosts: questionPosts.map(
+        (questionPost) => questionPost.serialize())
     });
   })
   .catch(err => {
@@ -28,6 +30,22 @@ app.get("/questionPost", (req, res) => {
     res.status(500).json({ message: "Something happened from app.get area"});
   });
 });
+
+// app.get("/questionPost", (req, res) => {
+//   QuestionBoard
+//   .find()
+//   .limit(8)
+//   .then(post =>
+//     res.json({
+//       parentName: post.parentName,
+//       title: post.title,
+//       question: post.question.content
+//     }))
+//   .catch(err => {
+//     console.error(err);
+//     res.status(500).json({ message: "Something happened from app.get area"});
+//   });
+// });
 
 app.get("/questionPost/:id", (req, res) => {
   QuestionBoard
