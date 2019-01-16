@@ -2,7 +2,7 @@
   "name": "babiesquestionsapp",
   "version": "1.0.0",
   "description": "Questions from babies/kiddies",
-  "main": "index.js",
+  "main": "mainServer.js",
   "scripts": {
     "start": "node mainServer.js",
     "test": "mocha"
