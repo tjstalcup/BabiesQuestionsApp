@@ -20,10 +20,13 @@ app.get("/questionPost", (req, res) => {
   .find()
   // .limit(8)
   .then(questionPosts => {
-    res.json({
-      questionPosts: questionPosts.map(
-        (questionPost) => questionPost.serialize())
-    });
+    res.json({questionPosts}
+    //   {
+    //   questionPosts: questionPosts.map(
+    //     (questionPost) => questionPost.serialize())
+    // }
+  );
+
   })
   .catch(err => {
     console.error(err);
