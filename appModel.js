@@ -24,7 +24,8 @@ return {
   id: this._id,
   parentName: this.parentName,
   title: this.title,
-  zipcode: this.zipcode
+  zipcode: this.zipcode,
+  question: this.question
   };
 };
 

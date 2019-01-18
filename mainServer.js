@@ -3,6 +3,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 // const bodyParser = require("body-parser");
+require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 
@@ -15,16 +16,26 @@ app.use(express.json());
 
 app.use(express.static('FrontMain'));
 
+mongoose.connect('mongodb://boardCreator619:board123@ds145584.mlab.com:45584/questionsboard', { useNewUrlParser: true }, function(err){
+if(err){
+  console.log(err);
+}else {
+  console.log('connected to stupid database.');
+}
+});
+
+
+
 app.get("/questionPost", (req, res) => {
   QuestionBoard
   .find()
   // .limit(8)
   .then(questionPosts => {
-    res.json({questionPosts}
-    //   {
-    //   questionPosts: questionPosts.map(
-    //     (questionPost) => questionPost.serialize())
-    // }
+    res.json(
+      {
+      questionPosts: questionPosts.map(
+        (questionPost) => questionPost.serialize())
+    }
   );
 
   })
