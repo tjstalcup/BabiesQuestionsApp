@@ -6,53 +6,53 @@
 //
 // testpage();
 
-const practiceData = {
-  "postData": [
-    {
-      "id": "01",
-      "question": "Why the sky is blue?",
-      "childAge": 4,
-      "parentName": "Tom Smith",
-      "Date": "01/02/18"
-    },
-    {
-      "id": "02",
-      "question": "Why is grass green?",
-      "childAge": 3,
-      "parentName": "Nick Reed",
-      "Date": "01/10/18"
-    },
-    {
-      "id": "03",
-      "question": "How car go fast?",
-      "childAge": 5,
-      "parentName": "Ryan Cooper",
-      "Date": "01/15/18"
-    },
-    {
-      "id": "04",
-      "question": "Why dog is big?",
-      "childAge": 6,
-      "parentName": "Sarah Batahi",
-      "Date": "01/30/18"
-    }
-  ]
-};
-function postInfo(callbackFn) {
-  setTimeout(function(){callbackFn(practiceData)}, 100);
-}
-function displayPostInfo(data) {
-  for(index in data.postData){
-    $('.container').append(
-      '<p>' + data.postData[index].question + '</p>');
-  }
-}
-function enactDisplayPostInfo() {
-  postInfo(displayPostInfo);
-}
-$(function(){
-  enactDisplayPostInfo();
-})
+// const practiceData = {
+//   "postData": [
+//     {
+//       "id": "01",
+//       "question": "Why the sky is blue?",
+//       "childAge": 4,
+//       "parentName": "Tom Smith",
+//       "Date": "01/02/18"
+//     },
+//     {
+//       "id": "02",
+//       "question": "Why is grass green?",
+//       "childAge": 3,
+//       "parentName": "Nick Reed",
+//       "Date": "01/10/18"
+//     },
+//     {
+//       "id": "03",
+//       "question": "How car go fast?",
+//       "childAge": 5,
+//       "parentName": "Ryan Cooper",
+//       "Date": "01/15/18"
+//     },
+//     {
+//       "id": "04",
+//       "question": "Why dog is big?",
+//       "childAge": 6,
+//       "parentName": "Sarah Batahi",
+//       "Date": "01/30/18"
+//     }
+//   ]
+// };
+// function postInfo(callbackFn) {
+//   setTimeout(function(){callbackFn(practiceData)}, 100);
+// }
+// function displayPostInfo(data) {
+//   for(index in data.postData){
+//     $('.container').append(
+//       '<p>' + data.postData[index].question + '</p>');
+//   }
+// }
+// function enactDisplayPostInfo() {
+//   postInfo(displayPostInfo);
+// }
+// $(function(){
+//   enactDisplayPostInfo();
+// })
 
 // $(enactDisplayPostInfo());
 
@@ -80,15 +80,54 @@ function enterMainPage() {
         </ul>
        </nav>
        <section id='secondaryContainer'>
-        <h3>Your Sharing Journey Column</h3>
-        <p>Post:</p>
-        <p>By:</p>
-
-        <div class='post-user'>
-        </div>
-        Put your comment below here:
-        <br>
-        <input type='textarea'>
+       <h3>Your Sharing Center</h3>
+        <ul id='usersPosts'>
+          <li class='eachPost'>
+            <p>Post:</p>
+            <p>By:</p>
+            <div class='post-user'>
+            </div>
+            Put your comment below here:
+            <br>
+            <input type='textarea'>
+          </li>
+          <li class='eachPost'>
+            <p>Post:</p>
+            <p>By:</p>
+            <div class='post-user'>
+            </div>
+            Put your comment below here:
+            <br>
+            <input type='textarea'>
+          </li>
+          <li class='eachPost'>
+            <p>Post:</p>
+            <p>By:</p>
+            <div class='post-user'>
+            </div>
+            Put your comment below here:
+            <br>
+            <input type='textarea'>
+          </li>
+          <li class='eachPost'>
+            <p>Post:</p>
+            <p>By:</p>
+            <div class='post-user'>
+            </div>
+            Put your comment below here:
+            <br>
+            <input type='textarea'>
+          </li>
+          <li class='eachPost'>
+            <p>Post:</p>
+            <p>By:</p>
+            <div class='post-user'>
+            </div>
+            Put your comment below here:
+            <br>
+            <input type='textarea'>
+          </li>
+        </ul>
        </section>
        `
      );
@@ -96,6 +135,12 @@ function enterMainPage() {
     console.log('entered the main page successful');
     // $(reportIssue());
   }
+
+// ${body.questionboard.title[0]}
+
+
+
+
   //  <p>${Date}</p> for up above here.
 // //<section>
 //  <img src='${pic[0]}'>
@@ -147,7 +192,7 @@ function enterMainPage() {
             <br>
             <input class='reportbox' type='text' placeholder='Your email?'>
             <br>
-            <input class='reporttext placeholder='Required Input'' type='text' placeholder='please type down here'>
+            <textarea class='reporttext' placeholder='please type down here'></textarea>
           </form>
         </section>
         `);

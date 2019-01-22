@@ -20,7 +20,7 @@ mongoose.connect('mongodb://boardCreator619:board123@ds145584.mlab.com:45584/que
 if(err){
   console.log(err);
 }else {
-  console.log('connected to stupid database.');
+  console.log('connected to database.');
 }
 });
 

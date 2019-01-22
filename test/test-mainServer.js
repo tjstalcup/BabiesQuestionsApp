@@ -80,12 +80,55 @@ describe('Question Posts API resource', function() {
 //
   describe("GET endpoint", function() {
     it('should return all exisitng posts', function() {
-      chai.request(app)
-        .get('/questionPost')
-        .end(function(err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-        });
+      return chai.request(app)
+      .get('/questionPost')
+      .then(function(res) {
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        // expect(res.body.questionboards).to.be.above(0);
+        // expect(res.body.questionboards).to.be.a('array');
+        // res.body.questionboards.forEach(function(questionboard) {
+        //   expect(questionboard).to.be.a('object');
+        //   expect(questionboard).to.include.keys('id', 'parentName', 'zipcode', 'title', 'question');
+        // });
+      })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // let res;
+      // return chai.request(app)
+      //   .get('/questionPost')
+      //   .then(function(_res) {
+      //     res = _res;
+      //     expect(res).to.have.status(200);
+      //     expect(res.body.questionboards).to.have.lengthOf.at.least(1);
+      //     return QuestionBoard.count();
+      //   })
+      //   .then(function(count) {
+      //     expect(res.body.questionboards).to.have.lengthOf(count);
+      //   });
+
+        // .end(function(err, res) {
+        //   expect(err).to.be.null;
+        //   expect(res).to.have.status(200);
+        //   expect(res.body).to.be.a('array');
+        // });
+
       // let res;
       // return chai.request(app)
       //   .get('/questionPost')
@@ -100,6 +143,14 @@ describe('Question Posts API resource', function() {
       //   });
     });
     it('should return question posts with right fields', function() {
+      return chai.request(app)
+        .get('/questionPost')
+        .then(function (res) {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          // expect(res.body).be.a('array');
+        })
+
   //     let resQuestionPost;
   //     return chai.request(app)
   //       .get('/questionPost')
