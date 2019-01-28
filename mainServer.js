@@ -16,13 +16,13 @@ app.use(express.json());
 
 app.use(express.static('FrontMain'));
 
-mongoose.connect('mongodb://boardCreator619:board123@ds111025.mlab.com:11025/questionsboard', { useNewUrlParser: true }, function(err){
-if(err){
-  console.log(err);
-}else {
-  console.log('connected to database.');
-}
-});
+// mongoose.connect('mongodb://boardCreator619:board123@ds111025.mlab.com:11025/questionsboard', { useNewUrlParser: true }, function(err){
+// if(err){
+//   console.log(err);
+// }else {
+//   console.log('connected to database.');
+// }
+// });
 
 
 

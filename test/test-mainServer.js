@@ -57,32 +57,33 @@ describe('GET endpoint', function() {
   it('should return all existing posts', function() {
     let res;
     return chai.request(app)
-      .get('/testQuestionPosts')
+      .get("/questionPost")
       .then(_res => {
         res = _res;
         res.should.have.status(200);
-        res.body.should.have.lengthOf.at.least(1);
+        res.should.be.json;
+        res.body.questionPosts.should.have.lengthOf.at.least(1);
         return QuestionBoard.count();
       })
       .then(count => {
-        res.body.should.have.lengthOf(count);
+        res.body.questionPosts.should.have.lengthOf(count);
       });
   });
   it('should return posts with right inputs', function() {
     let resQuestionBoard;
     return chai.request(app)
-      .get('/testQuestionPosts')
+      .get("/questionPost")
       .then(function (res) {
         res.should.have.status(200);
         res.should.be.json;
-        res.body.should.be.a('array');
-        res.body.should.have.lengthOf.at.least(1);
+        res.body.questionPosts.should.be.a('array');
+        res.body.questionPosts.should.have.lengthOf.at.least(1);
 
-        res.body.forEach(function(post) {
+        res.body.questionPosts.forEach(function(post) {
           post.should.be.a('object');
           post.should.include.keys('parentName', 'title', 'zipcode');
         });
-        resQuestionBoard = res.body[0];
+        resQuestionBoard = res.body.questionPosts[0];
         return QuestionBoard.findById(resQuestionBoard.id);
       })
       .then(post => {
