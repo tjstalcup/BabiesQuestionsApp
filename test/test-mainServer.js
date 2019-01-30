@@ -63,7 +63,7 @@ describe('GET endpoint', function() {
         res.should.have.status(200);
         res.should.be.json;
         res.body.questionPosts.should.have.lengthOf.at.least(1);
-        return QuestionBoard.count();
+        return QuestionBoard.countDocuments();
       })
       .then(count => {
         res.body.questionPosts.should.have.lengthOf(count);
@@ -92,6 +92,86 @@ describe('GET endpoint', function() {
         resQuestionBoard.zipcode.should.equal(post.zipcode);
       });
   });
-  // ---------------------
+  it('should return 5 most recent post', function() {
+    let res;
+    return chai.request(app)
+    .get('/questionPost')
+    //in future will add modularization
+    .then(_res => {
+      res = _res;
+      res.should.have.status(200);
+      res.body.questionPosts.should.have.lengthOf.at.least(4);
+    })
+  });
 });
+describe("POST endpoint", function() {
+  it('should add a new post', function() {
+    const newPost = {
+      parentName: 'Jerry Shields',
+      title: "Endless Storm",
+      zipcode: "77777"
+    };
+    return chai.request(app)
+    .post("/questionPost")
+    .send(newPost)
+    .then(function(res) {
+      res.should.have.status(201);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.include.keys('id', 'parentName', 'title', 'zipcode');
+      res.body.id.should.not.be.null;
+      res.body.parentName.should.equal(newPost.parentName);
+      res.body.title.should.equal(newPost.title);
+      res.body.zipcode.should.equal(newPost.zipcode);
+      return QuestionBoard.findById(res.body.id);
+    })
+    .then(function(post) {
+      post.parentName.should.equal(newPost.parentName);
+      post.title.should.equal(newPost.title);
+      post.zipcode.should.equal(newPost.zipcode);
+    });
+  });
+});
+describe('PUT endpoint', function() {
+  it('update a single post', function() {
+    const updatePost = {
+      parentName: "Shelly Far-Out",
+      title: "UFO has landed",
+      zipcode: "10001"
+    };
+    return QuestionBoard
+      .findOneAndUpdate()
+      .then(modifyPost => {
+        updatePost.id = modifyPost.id;
+      return chai.request(app)
+        .put(`/questionPost/${modifyPost.id}`)
+        .send(updatePost);
+      })
+      .then(res => {
+        res.should.have.status(204);
+        return QuestionBoard.findById(updatePost.id);
+      })
+      .then(modifyPost => {
+        modifyPost.parentName.should.equal(updatePost.parentName);
+        modifyPost.title.should.equal(updatePost.title);
+        modifyPost.zipcode.should.equal(updatePost.zipcode);
+      });
+  });
+});
+describe('DELETE endpoint', function() {
+  it('should delete a post by id', function() {
+    let post;
+    return QuestionBoard
+    .findOneAndDelete()
+    .then(_post => {
+      post = _post;
+      return chai.request(app).delete(`/questionPost/${post.id}`);
+    })
+    .then(res => {
+      res.should.have.status(204);
+      return QuestionBoard.findById(post.id);
+    })
+  });
+});
+
 });

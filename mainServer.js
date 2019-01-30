@@ -110,13 +110,13 @@ app.put("/questionPost/:id", (req, res) => {
     }
   });
   QuestionBoard
-    .findByIdandUpdate(req.params.id, {$set: toUpdate})
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
     .then(questionPost => res.status(204).end())
     .catch(err => res.status(500).json({message: "Something happened in app.put area"}));
 });
 
 app.delete("/questionPost/:id", (req, res) => {
-  QuestionBoard.findByIdandRemove(req.params.id)
+  QuestionBoard.findByIdAndRemove(req.params.id)
   .then(questionPost => res.status(204).end())
   .catch(err => res.status(500).json({message: "Something happened in app.delete area"}));
 });
