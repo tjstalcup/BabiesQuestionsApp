@@ -64,6 +64,104 @@
 // }
 // $(test());
 
+'use strict'
+
+// const CORS = "https://cors-anywhere.herokuapp.com/";
+// const POST_RESULTS = ('/mainServer');
+//
+// // function allPosts(callback) {
+// //   const listOfPosts = {
+// //     url: CORS + POST_RESULTS,
+// //     datatype: 'json',
+// //     type: 'GET',
+// //     success: callback
+// //   };
+// //   $.ajax(listOfPosts);
+// //   console.log('successful callback');
+// // }
+// // $(allPosts());
+//
+// //Testing ajax receiving page
+//
+// function retrievePosts(result) {
+//   $.ajax({
+//     url: CORS + POST_RESULTS,
+//     datatype: 'json',
+//     type: 'GET'
+//   })
+//   .done(function(data){
+//     console.log('successful');
+//     insidePage(data);
+//   })
+//   .fail(function(xhr, status, errorThrown){
+//     alert('This stage has been failed');
+//     console.log('status:' + status);
+//     console.log('error:' + errorThrown);
+//     console.log(xhr);
+//   })
+// }
+// $(retrievePosts);
+//Another test - FAIL
+
+// $.get(CORS + 'mainServer.js', function(data, status){
+//   console.log('Data:' + data + "\nStatus:" + status);
+//   insidePage(data);
+// });
+
+//Another test -
+// const resultTemplate = (
+//   '<li class="eachPost">' +
+//     '<p>Post:</p>' +
+//     '<p>By:/p>' +
+//     '<span class="post-user"></span>' +
+//     '<span>Location:</span>' +
+//     Put your comment below here: +
+//     '<br>' +
+//     '<input type="textarea">' +
+//   '</li>';
+// );
+//
+// const posts_centerURL = '/questionPost'
+//
+// function insidePage2() {
+//   console.log('Retrieving Posts')
+//   $.getJSON(posts_centerURL, function(allData) {
+//     console.log('rendering Posts');
+//     const postsList = allData.map(function(data){
+//       const result = $(resultTemplate);
+//       element.attr('id', data.id);
+//       element.find('.eachPost').text(data.parentName);
+//       data.
+//     })
+//   })
+// }
+
+//Unknown attempt to get Ajax coordinate with jquery
+//
+// function insidePage(data){
+//   $('#entrySubmit').click(function(e){
+//     e.preventDefault();
+//     const results = data.map(obj => {
+//       return `
+//       <li class='eachPost'>
+//         <p>Post: ${obj.title}</p>
+//         <p>By:${obj.parentName}</p>
+//         <span class='post-user'>
+//         ${obj.question}
+//         </span>
+//         <span>Location: ${obj.zipcode}</span>
+//         Put your comment below here:
+//         <br>
+//         <input type='textarea'>
+//       </li>`;
+//     })
+//     $('#usersPosts').html(results);
+//   });
+// }
+// $(insidePage);
+
+
+//  This is stage of what I wanted after login
 function enterMainPage() {
   $('#entrySubmit').click(function(e){
     e.preventDefault();
@@ -79,54 +177,20 @@ function enterMainPage() {
           <li class='navBox'>Suggestions</li>
         </ul>
        </nav>
+       <button id='postCreation'>My Post Creation</button>
+       <div id='postbox'></div>
        <section id='secondaryContainer'>
        <h3>Your Sharing Center</h3>
         <ul id='usersPosts'>
-          <li class='eachPost'>
-            <p>Post:</p>
-            <p>By:</p>
-            <div class='post-user'>
-            </div>
-            Put your comment below here:
-            <br>
-            <input type='textarea'>
-          </li>
-          <li class='eachPost'>
-            <p>Post:</p>
-            <p>By:</p>
-            <div class='post-user'>
-            </div>
-            Put your comment below here:
-            <br>
-            <input type='textarea'>
-          </li>
-          <li class='eachPost'>
-            <p>Post:</p>
-            <p>By:</p>
-            <div class='post-user'>
-            </div>
-            Put your comment below here:
-            <br>
-            <input type='textarea'>
-          </li>
-          <li class='eachPost'>
-            <p>Post:</p>
-            <p>By:</p>
-            <div class='post-user'>
-            </div>
-            Put your comment below here:
-            <br>
-            <input type='textarea'>
-          </li>
-          <li class='eachPost'>
-            <p>Post:</p>
-            <p>By:</p>
-            <div class='post-user'>
-            </div>
-            Put your comment below here:
-            <br>
-            <input type='textarea'>
-          </li>
+        <li class='eachPost'>
+          <p>Post:EXAMPLE</p>
+          <p>By:EXAMPLE</p>
+          <div class='post-user'>
+          </div>
+          Put your comment below here:
+          <br>
+          <input type='textarea'>
+        </li>
         </ul>
        </section>
        `
@@ -134,7 +198,74 @@ function enterMainPage() {
   });
     console.log('entered the main page successful');
     // $(reportIssue());
+    $(createPost);
   }
+
+
+  function createPost() {
+    $('#postCreation').on('click', function(){
+      $('#postbox').html(`
+        <h2>Post Creation</h2>
+        <fieldset id='postDesign'>
+        <legend>Post Submission</legend>
+        Title: <input class='postInfo' type='text' placeholder='Write down Title'>
+        Question: <input class='postInfo' type='text' placeholder='Write down a question'>
+        content: <textarea class='postInfo' type='text' placeholder='Write down content'>
+        date:
+        <input type='button'>Submit the post</input>
+        </fieldset>`
+      );
+    });
+  }
+  // $(createPost);
+
+// Just hold idea from enterMainPage
+  // <li class='eachPost'>
+  //   <p>Post:</p>
+  //   <p>By:</p>
+  //   <div class='post-user'>
+  //   </div>
+  //   Put your comment below here:
+  //   <br>
+  //   <input type='textarea'>
+  // </li>
+  // <li class='eachPost'>
+  //   <p>Post:</p>
+  //   <p>By:</p>
+  //   <div class='post-user'>
+  //   </div>
+  //   Put your comment below here:
+  //   <br>
+  //   <input type='textarea'>
+  // </li>
+  // <li class='eachPost'>
+  //   <p>Post:</p>
+  //   <p>By:</p>
+  //   <div class='post-user'>
+  //   </div>
+  //   Put your comment below here:
+  //   <br>
+  //   <input type='textarea'>
+  // </li>
+  // <li class='eachPost'>
+  //   <p>Post:</p>
+  //   <p>By:</p>
+  //   <div class='post-user'>
+  //   </div>
+  //   Put your comment below here:
+  //   <br>
+  //   <input type='textarea'>
+  // </li>
+  // <li class='eachPost'>
+  //   <p>Post:</p>
+  //   <p>By:</p>
+  //   <div class='post-user'>
+  //   </div>
+  //   Put your comment below here:
+  //   <br>
+  //   <input type='textarea'>
+  // </li>
+
 
 // ${body.questionboard.title[0]}
 
@@ -151,7 +282,7 @@ function enterMainPage() {
 //  <img src='${pic[5]}'>
 // </section>
 // <p> ${data.post[index].question} </p>
-  $(enterMainPage());
+  $(enterMainPage);
 
   function profileCreation() {
     $('#signUp').click(function(e) {

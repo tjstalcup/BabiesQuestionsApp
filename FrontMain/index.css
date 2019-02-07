@@ -39,7 +39,7 @@ footer {
   bottom: 0;
 }
 #nav {
-  margin: 0 50px;
+  margin: 0 100px;
   border: solid red;
   height: 68px;
   text-align: center;
@@ -52,6 +52,23 @@ footer {
 }
 .navBox:hover {
   text-decoration: underline;
+}
+#postCreation{
+  background-color: gold;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+#postbox {
+  width: 300px;
+  height: 200px;
+  background:  white;
+  border: solid lightblue;
+  position: absolute;
+  left: 450px;
+  z-index: 2;
+  /* display: none; */
 }
 .reportbox {
   width: 300px;
@@ -78,7 +95,7 @@ footer {
   border: solid green 1px;
   margin-top: 5px;
   padding: 10px;
-  margin: 15px 50px;
+  margin: 15px 100px;
   height: 450px;
   overflow: scroll;
   /* text-align: center; */
