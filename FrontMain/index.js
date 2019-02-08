@@ -1,10 +1,3 @@
-// function testpage() {
-//   $(body).click(
-//     console.log('it works...')
-//   );
-// }
-//
-// testpage();
 
 // const practiceData = {
 //   "postData": [
@@ -57,56 +50,9 @@
 // $(enactDisplayPostInfo());
 
 // // ==================This section is for post/comment/profile==================
-// function test() {
-//   $('#entryLogin').submit(
-//     console.log('it worked')
-//   );
-// }
-// $(test());
 
 'use strict'
 
-// const CORS = "https://cors-anywhere.herokuapp.com/";
-// const POST_RESULTS = ('/mainServer');
-//
-// // function allPosts(callback) {
-// //   const listOfPosts = {
-// //     url: CORS + POST_RESULTS,
-// //     datatype: 'json',
-// //     type: 'GET',
-// //     success: callback
-// //   };
-// //   $.ajax(listOfPosts);
-// //   console.log('successful callback');
-// // }
-// // $(allPosts());
-//
-// //Testing ajax receiving page
-//
-// function retrievePosts(result) {
-//   $.ajax({
-//     url: CORS + POST_RESULTS,
-//     datatype: 'json',
-//     type: 'GET'
-//   })
-//   .done(function(data){
-//     console.log('successful');
-//     insidePage(data);
-//   })
-//   .fail(function(xhr, status, errorThrown){
-//     alert('This stage has been failed');
-//     console.log('status:' + status);
-//     console.log('error:' + errorThrown);
-//     console.log(xhr);
-//   })
-// }
-// $(retrievePosts);
-//Another test - FAIL
-
-// $.get(CORS + 'mainServer.js', function(data, status){
-//   console.log('Data:' + data + "\nStatus:" + status);
-//   insidePage(data);
-// });
 
 //Another test -
 // const resultTemplate = (
@@ -121,7 +67,7 @@
 //   '</li>';
 // );
 //
-// const posts_centerURL = '/questionPost'
+const posts_centerURL = '/questionPost'
 //
 // function insidePage2() {
 //   console.log('Retrieving Posts')
@@ -218,6 +164,43 @@ function enterMainPage() {
     });
   }
   // $(createPost);
+
+  //Call AJAX FRAMEWORK
+function addPost(dataPost) {
+  console.log('add new post: ' + dataPost);
+  $.ajax({
+    method: 'POST',
+    url: posts_centerURL,
+    data: JSON.stringify(dataPost),
+    success: function(data) {
+      insidePage2();
+    },
+    datatype: 'json',
+    contentType: 'application/json'
+  });
+}
+
+function deletePost(postId) {
+  console.log('Deleting Post `' + postId + '`');
+  $.ajax({
+    url: posts_centerURL + '/' + postId,
+    method: 'DELETE',
+    success: insidePage2
+  });
+}
+
+function updatePost(changePost) {
+  console.log('updating post`' + changePost.id + '`');
+  $.ajax({
+    url: posts_centerURL + '/' + changePost.id,
+    method: 'PUT',
+    data: changePost,
+    success: function(data) {
+      insidePage2();
+    }
+  });
+}
+  //------------------------------
 
 // Just hold idea from enterMainPage
   // <li class='eachPost'>
@@ -338,23 +321,23 @@ function backToMainPage() {
   });
 }
 
-function selectTopic() {
-  $('.navbox').click(function(e) {
-    e.preventDefault();
-    $('.container').html(
-      `<h3>${this.title}</h3>
-      <ul>Most recent posts:
-        <li>${this.data[0]}</li>
-        <li>${this.data[1]}</li>
-        <li>${this.data[2]}</li>
-        <li>${this.data[3]}</li>
-        <li>${this.data[4]}</li>
-        <li>${this.data[5]}</li>
-        <li>${this.data[6]}</li>
-      </ul>`
-    )
-  })
-}
+// function selectTopic() {
+//   $('.navbox').click(function(e) {
+//     e.preventDefault();
+//     $('.container').html(
+//       `<h3>${this.title}</h3>
+//       <ul>Most recent posts:
+//         <li>${this.data[0]}</li>
+//         <li>${this.data[1]}</li>
+//         <li>${this.data[2]}</li>
+//         <li>${this.data[3]}</li>
+//         <li>${this.data[4]}</li>
+//         <li>${this.data[5]}</li>
+//         <li>${this.data[6]}</li>
+//       </ul>`
+//     )
+//   })
+// }
 
 //   MVP
 // -Create User Posts - kinda
