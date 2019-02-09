@@ -15,7 +15,7 @@ const { QuestionBoard } = require("./appModel");
 
 // QuestionBoard.create('Uncle Tim', 99999, 'Falling Star', 'Why Cow can"t fall down [01/01/19, "ldskfjlkdsofjsaidjfosad", 5, "No"]')
 
-router.get("/questionPost", (req, res) => {
+router.get("/", (req, res) => {
   QuestionBoard
   .find()
   // .limit(8)
@@ -50,7 +50,7 @@ router.get("/questionPost", (req, res) => {
 //   });
 // });
 
-router.get("/questionPost/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   QuestionBoard
     .findById(req.params.id)
     .then(questionPost => res.json(questionPost.serialize()))
@@ -60,7 +60,7 @@ router.get("/questionPost/:id", (req, res) => {
     });
 });
 
-router.post("/questionPost", (req, res) => {
+router.post("/", (req, res) => {
   const requiredInputs = ["parentName", "title"];
   for (let i=0; i< requiredInputs.length; i++) {
     const input = requiredInputs[i];
@@ -83,7 +83,7 @@ router.post("/questionPost", (req, res) => {
   });
 });
 
-router.put("/questionPost/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message =
     `Request path id (${req.params.id}) and request body id` + `(${req.body.id}) must match`;
@@ -104,7 +104,7 @@ router.put("/questionPost/:id", (req, res) => {
     .catch(err => res.status(500).json({message: "Something happened in app.put area"}));
 });
 
-router.delete("/questionPost/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   QuestionBoard.findByIdAndRemove(req.params.id)
   .then(questionPost => res.status(204).end())
   .catch(err => res.status(500).json({message: "Something happened in app.delete area"}));

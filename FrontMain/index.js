@@ -54,7 +54,10 @@
 'use strict'
 
 
-//Another test -
+// Another test -
+
+const posts_centerURL = '/questionPost'
+
 // const resultTemplate = (
 //   '<li class="eachPost">' +
 //     '<p>Post:</p>' +
@@ -66,9 +69,7 @@
 //     '<input type="textarea">' +
 //   '</li>';
 // );
-//
-const posts_centerURL = '/questionPost'
-//
+
 // function insidePage2() {
 //   console.log('Retrieving Posts')
 //   $.getJSON(posts_centerURL, function(allData) {
@@ -76,10 +77,15 @@ const posts_centerURL = '/questionPost'
 //     const postsList = allData.map(function(data){
 //       const result = $(resultTemplate);
 //       element.attr('id', data.id);
-//       element.find('.eachPost').text(data.parentName);
-//       data.
-//     })
-//   })
+//       element.find('#usersPosts').text(data.parentName);
+//       data.question.forEach(function(info){
+//         element.find('#questionData').append(
+//           '<li>' + info + '</li>');
+//       });
+//       return element;
+//     });
+//     $('.eachPost').html(postsList)
+//   });
 // }
 
 //Unknown attempt to get Ajax coordinate with jquery
@@ -129,7 +135,7 @@ function enterMainPage() {
        <h3>Your Sharing Center</h3>
         <ul id='usersPosts'>
         <li class='eachPost'>
-          <p>Post:EXAMPLE</p>
+          <ul id="questionData">Post:EXAMPLE</ul>
           <p>By:EXAMPLE</p>
           <div class='post-user'>
           </div>
@@ -145,24 +151,68 @@ function enterMainPage() {
     console.log('entered the main page successful');
     // $(reportIssue());
     $(createPost);
+    // $(insidePage2);
+    // $(postUp);
   }
 
+const currentDate = new Date();
+const month = currentDate.getMonth() + 1;
+const day = currentDate.getDate();
+const year = currentDate.getFullYear();
+
+const newCurrentDate = month + "/" + day + "/" + year;
 
   function createPost() {
-    $('#postCreation').on('click', function(){
+    $('.container').on('click', '#postCreation', function(e){
+      e.preventDefault();
+      console.log('post testing worked.');
       $('#postbox').html(`
         <h2>Post Creation</h2>
-        <fieldset id='postDesign'>
-        <legend>Post Submission</legend>
-        Title: <input class='postInfo' type='text' placeholder='Write down Title'>
-        Question: <input class='postInfo' type='text' placeholder='Write down a question'>
-        content: <textarea class='postInfo' type='text' placeholder='Write down content'>
-        date:
-        <input type='button'>Submit the post</input>
-        </fieldset>`
+        <form id="singlePost">
+          <fieldset id='postDesign'>
+          <legend>Creative Zone</legend>
+          Title: <input id="titleInfo" class='postInfo' type='text' placeholder='Write down Title'>
+          <br>
+          Question: <input id="questionData" class='postInfo' type='text' placeholder='Write down a question'>
+          <br>
+          content: <textarea class='postInfo' type='text' placeholder='Write down content'></textarea>
+          <br>
+          date: ${newCurrentDate}
+          <br>
+          <input id="postSubmit" type='submit' value='Submit the post'></input>
+          </fieldset>
+        </form>`
       );
     });
   }
+
+  // const newTitle = document.getElementById('titleInfo').value;
+  // const newQuestion = document.getElementById.('questionData').value;
+
+
+function postUp(){
+$('.container').on('click', '#postSubmit', function(e){
+  e.preventDefault();
+  console.log("received data for post");
+  $('#usersPosts').append(`<li class='eachPost'>
+    <ul id="questionData">Post:${newTitle} | ${newQuestion}</ul>
+    <p>By:EXAMPLE</p>
+    <div class='post-user'>
+    </div>
+    Put your comment below here:
+    <br>
+    <input type='textarea'>
+  </li>`);
+});
+
+  // const newTitle = document.getElementById('titleInfo').value;
+  // const newQuestion = document.getElementById.('questionData').value;
+  // console.log('receiving new post data');
+  // const newUserPost =  new postInput(newTitle, newQuestion);
+  // console.log(newUserPost);
+}
+$(postUp);
+
   // $(createPost);
 
   //Call AJAX FRAMEWORK

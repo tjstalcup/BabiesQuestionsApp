@@ -1,7 +1,34 @@
 "use strict"
 
 const mongoose = require('mongoose');
-const uuid = require('uuid/v4');
+const uuid = require('uuid');
+
+// const userPostFormat = {
+//   create: function(title, parentName, question) {
+//     console.log("create a new post");
+//     const singlePost = {
+//       title: title,
+//       id: uuid.v4(),
+//       parentName: parentName,
+//       question: question
+//     };
+//     this.singlePosts[singlePost.id] = singlePost;
+//     return singlePost;
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const childQuestionSchema = mongoose.Schema({
   parentName: {type: String},

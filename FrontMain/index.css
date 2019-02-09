@@ -61,14 +61,22 @@ footer {
   text-decoration: none;
 }
 #postbox {
-  width: 300px;
-  height: 200px;
+  width: 380px;
+  height: 250px;
   background:  white;
   border: solid lightblue;
   position: absolute;
   left: 450px;
   z-index: 2;
+  padding: 10px;
   /* display: none; */
+}
+#postDesign {
+  padding: 10px;
+}
+.postInfo {
+  margin: 0 0 5px 5px;
+  padding: 5px;
 }
 .reportbox {
   width: 300px;
