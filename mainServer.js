@@ -2,14 +2,20 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require('morgan');
+const cors = require('cors');
 // const bodyParser = require("body-parser");
 require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 
 const app = express();
+app.use(cors());
+app.use(morgan('common'));
+
 
 const posts_centerRouter = require('./posts_centerRouter')
+
 app.use(express.json());
 // app.use(bodyParser.json());
 

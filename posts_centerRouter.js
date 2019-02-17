@@ -13,7 +13,7 @@ const { QuestionBoard } = require("./appModel");
 // }
 // });
 
-// QuestionBoard.create('Uncle Tim', 99999, 'Falling Star', 'Why Cow can"t fall down [01/01/19, "ldskfjlkdsofjsaidjfosad", 5, "No"]')
+// QuestionBoard.create('Uncle Tim', 'Falling Star', 99999, 'Why Cow can"t fall down');
 
 router.get("/", (req, res) => {
   QuestionBoard
@@ -59,7 +59,7 @@ router.get("/:id", (req, res) => {
       res.status(500).json({message: "Something happened from app.get:id area"});
     });
 });
-
+//Shannon - keep your eyes on this section for confusing ajax callback
 router.post("/", (req, res) => {
   const requiredInputs = ["parentName", "title"];
   for (let i=0; i< requiredInputs.length; i++) {

@@ -56,7 +56,35 @@
 
 // Another test -
 
-const posts_centerURL = '/questionPost'
+const posts_centerURL = 'http://localhost:4747/questionPost'
+//another attempt - another failure
+function getAllPosts(callback) {
+  const postsData = {
+    url: posts_centerURL,
+    datatype: 'json',
+    type: 'GET',
+    success: callback
+  };
+  console.log(postsData);
+  $.ajax(postsData);
+}
+function displayDataList(data) {
+  console.log(data);
+  // data.sort();
+  // ('.container').children('#secondaryContainer')
+  $.each(data.questionPosts, function(i, obj){
+    $('#usersPosts').append(`<li>${obj.title}</li>`);
+  });
+  // enterMainPage(data);
+}
+function getDataToDisplay(){
+  getAllPosts(displayDataList);
+  // enterMainPage(displayDataList);
+}
+
+$(getDataToDisplay);
+
+
 
 // const resultTemplate = (
 //   '<li class="eachPost">' +
@@ -120,11 +148,11 @@ function enterMainPage() {
     $('.container').html(
       `<nav>
         <ul id='nav'>
-          <li class='navBox'>General Questions</li>
+          <li class='navBox general_board'>General Questions</li>
           <li class='navBox'>Daughter Questions</li>
           <li class='navBox'>Son Questions</li>
-          <li class='navBox'>3-6 years old kids' Questions</li>
-          <li class='navBox'>6-10 years old kids' Questions</li>
+          <li class='navBox'>Tricky Questions</li>
+          <li class='navBox'>My Posts</li>
           <li class='navBox'>FAQs</li>
           <li class='navBox'>Suggestions</li>
         </ul>
@@ -150,6 +178,7 @@ function enterMainPage() {
   });
     console.log('entered the main page successful');
     // $(reportIssue());
+    $('#usersPosts').html('result here');
     $(createPost);
     // $(insidePage2);
     // $(postUp);
@@ -171,9 +200,9 @@ const newCurrentDate = month + "/" + day + "/" + year;
         <form id="singlePost">
           <fieldset id='postDesign'>
           <legend>Creative Zone</legend>
-          Title: <input id="titleInfo" class='postInfo' type='text' placeholder='Write down Title'>
+          Title: <input id="titleInfo" class='postInfo' type='text' value='' placeholder='Write down Title'>
           <br>
-          Question: <input id="questionData" class='postInfo' type='text' placeholder='Write down a question'>
+          Question: <input id="questionData" class='postInfo' type='text' value='' placeholder='Write down a question'>
           <br>
           content: <textarea class='postInfo' type='text' placeholder='Write down content'></textarea>
           <br>
@@ -185,18 +214,34 @@ const newCurrentDate = month + "/" + day + "/" + year;
       );
     });
   }
-
-  // const newTitle = document.getElementById('titleInfo').value;
-  // const newQuestion = document.getElementById.('questionData').value;
-
+// function getInputs() {
+//   $('.container').on('click', "#singlePost", function(e){
+//     e.preventDefault();
+//     // const newTitle = $('#titleInfo').val();
+//     // console.log(newTitle);
+//     const newTitle = document.getElementById('titleInfo').value;
+//     console.log(newTitle);
+//     const newQuestion = document.getElementById('questionData').value;
+//     console.log(newQuestion);
+//     // const newUserPost =  new postInput(newTitle, newQuestion);
+//     // console.log(newUserPost);
+//   });
+//   postUp(newTitle, newQuestion);
+// }
+// $(getInputs);
 
 function postUp(){
 $('.container').on('click', '#postSubmit', function(e){
   e.preventDefault();
+  const newTitle = document.getElementById('titleInfo').value;
+  console.log(newTitle);
+  const newQuestion = document.getElementById('questionData').value;
+  console.log(newQuestion);
   console.log("received data for post");
   $('#usersPosts').append(`<li class='eachPost'>
-    <ul id="questionData">Post:${newTitle} | ${newQuestion}</ul>
-    <p>By:EXAMPLE</p>
+    <ul id="questionData">Post Title: ${newTitle}</ul>
+    <p>The Question: ${newQuestion}</p>
+    <p>Content: </p>
     <div class='post-user'>
     </div>
     Put your comment below here:
