@@ -90,6 +90,13 @@ footer {
   resize: none;
   margin: 5px 0;
 }
+.suggestiontext {
+  width: 600px;
+  height: 300px;
+  /* text-align: center; */
+  resize: none;
+  margin: 5px 0;
+}
 #profileContainer {
   padding: 10px;
   display: inline-block;
@@ -114,4 +121,13 @@ footer {
   margin: 5px 0;
   padding: 8px;
 
+}
+
+ul.f {
+  list-style-position: inside;
+  border: 2px solid blue;
+  margin-left: 20px;
+}
+ul li.s {
+  padding-left: 25px;
 }

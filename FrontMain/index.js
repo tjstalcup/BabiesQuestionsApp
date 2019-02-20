@@ -70,76 +70,30 @@ function getAllPosts(callback) {
 }
 function displayDataList(data) {
   console.log(data);
-  // data.sort();
-  // ('.container').children('#secondaryContainer')
-  $.each(data.questionPosts, function(i, obj){
-    $('#usersPosts').append(`<li>${obj.title}</li>`);
+  $('#entrySubmit').click(function(e){
+    e.preventDefault();
+    $.each(data.questionPosts, function(i, obj){
+      $('#usersPosts').append(`<li class='eachPost'>
+        <ul id="questionData">Post Title: ${obj.title}</ul>
+        <p>The Question: ${obj.question.content}</p>
+        <p>Content: </p>
+        <div class='post-user'>
+        </div>
+        Put your comment below here:
+        <br>
+        <input type='textarea'>
+      </li>`);
+  })
   });
   // enterMainPage(data);
 }
+
 function getDataToDisplay(){
   getAllPosts(displayDataList);
   // enterMainPage(displayDataList);
 }
 
 $(getDataToDisplay);
-
-
-
-// const resultTemplate = (
-//   '<li class="eachPost">' +
-//     '<p>Post:</p>' +
-//     '<p>By:/p>' +
-//     '<span class="post-user"></span>' +
-//     '<span>Location:</span>' +
-//     Put your comment below here: +
-//     '<br>' +
-//     '<input type="textarea">' +
-//   '</li>';
-// );
-
-// function insidePage2() {
-//   console.log('Retrieving Posts')
-//   $.getJSON(posts_centerURL, function(allData) {
-//     console.log('rendering Posts');
-//     const postsList = allData.map(function(data){
-//       const result = $(resultTemplate);
-//       element.attr('id', data.id);
-//       element.find('#usersPosts').text(data.parentName);
-//       data.question.forEach(function(info){
-//         element.find('#questionData').append(
-//           '<li>' + info + '</li>');
-//       });
-//       return element;
-//     });
-//     $('.eachPost').html(postsList)
-//   });
-// }
-
-//Unknown attempt to get Ajax coordinate with jquery
-//
-// function insidePage(data){
-//   $('#entrySubmit').click(function(e){
-//     e.preventDefault();
-//     const results = data.map(obj => {
-//       return `
-//       <li class='eachPost'>
-//         <p>Post: ${obj.title}</p>
-//         <p>By:${obj.parentName}</p>
-//         <span class='post-user'>
-//         ${obj.question}
-//         </span>
-//         <span>Location: ${obj.zipcode}</span>
-//         Put your comment below here:
-//         <br>
-//         <input type='textarea'>
-//       </li>`;
-//     })
-//     $('#usersPosts').html(results);
-//   });
-// }
-// $(insidePage);
-
 
 //  This is stage of what I wanted after login
 function enterMainPage() {
@@ -148,13 +102,11 @@ function enterMainPage() {
     $('.container').html(
       `<nav>
         <ul id='nav'>
-          <li class='navBox general_board'>General Questions</li>
-          <li class='navBox'>Daughter Questions</li>
-          <li class='navBox'>Son Questions</li>
+          <li class='navBox' id='general_board'>General Questions</li>
           <li class='navBox'>Tricky Questions</li>
           <li class='navBox'>My Posts</li>
-          <li class='navBox'>FAQs</li>
-          <li class='navBox'>Suggestions</li>
+          <li class='navBox' id='faq'>FAQs</li>
+          <li class='navBox' id='suggestion'>Suggestions</li>
         </ul>
        </nav>
        <button id='postCreation'>My Post Creation</button>
@@ -178,11 +130,18 @@ function enterMainPage() {
   });
     console.log('entered the main page successful');
     // $(reportIssue());
-    $('#usersPosts').html('result here');
+    // $('#usersPosts').html('result here');
     $(createPost);
     // $(insidePage2);
     // $(postUp);
   }
+// function generalPage() {
+//   $('#general_board').on('click', function(e){
+//     e.preventDefault();
+//     enterMainPage();
+//   });
+// }
+// $(generalPage);
 
 const currentDate = new Date();
 const month = currentDate.getMonth() + 1;
@@ -214,21 +173,7 @@ const newCurrentDate = month + "/" + day + "/" + year;
       );
     });
   }
-// function getInputs() {
-//   $('.container').on('click', "#singlePost", function(e){
-//     e.preventDefault();
-//     // const newTitle = $('#titleInfo').val();
-//     // console.log(newTitle);
-//     const newTitle = document.getElementById('titleInfo').value;
-//     console.log(newTitle);
-//     const newQuestion = document.getElementById('questionData').value;
-//     console.log(newQuestion);
-//     // const newUserPost =  new postInput(newTitle, newQuestion);
-//     // console.log(newUserPost);
-//   });
-//   postUp(newTitle, newQuestion);
-// }
-// $(getInputs);
+
 
 function postUp(){
 $('.container').on('click', '#postSubmit', function(e){
@@ -249,16 +194,48 @@ $('.container').on('click', '#postSubmit', function(e){
     <input type='textarea'>
   </li>`);
 });
-
-  // const newTitle = document.getElementById('titleInfo').value;
-  // const newQuestion = document.getElementById.('questionData').value;
-  // console.log('receiving new post data');
-  // const newUserPost =  new postInput(newTitle, newQuestion);
-  // console.log(newUserPost);
 }
 $(postUp);
 
-  // $(createPost);
+function freqAQs(){
+  $('.container').on('click', '#faq', function(e){
+    e.preventDefault();
+    $('#secondaryContainer').html(`
+      <h2>Your FAQs board!</h2>
+      <ul class='f' >Questions????
+        <li>Q: Is there any children age limit for asking question?
+          <li class='s'>A: Guess as long it is before teenager age since this site is design for early age questions.</li>
+        </li>
+        <li>Q: Can I post a child's ridiclous, embarass, awkward, and hard question?
+          <li class='s'>A: Hell yeah, there is no question that is not allow to be share! </li>
+        </li>
+        <li>Q: Where can I report about my concern?
+          <li class='s'>A: You can find the icon at bottom left corner. Just click it away.</li>
+        </li>
+        <li>Q:
+            <li class='s'>A: </li>
+        </li>
+        <li></li>
+        <li></li>
+      </ul>`)
+  });
+}
+
+$(freqAQs);
+
+function suggestionTab() {
+  $('.container').on('click', '#suggestion', function(e){
+    e.preventDefault();
+    $('#secondaryContainer').html(`
+      <form>
+        Your email please, it is for future following up: <input class='reportbox' type='text' placeholder='Your email?'>
+        <br>
+        Your Suggestion(s): <textarea class='suggestiontext' placeholder='please type down here'></textarea>
+      </form>`)
+  });
+}
+
+  $(suggestionTab);
 
   //Call AJAX FRAMEWORK
 function addPost(dataPost) {
@@ -297,69 +274,7 @@ function updatePost(changePost) {
 }
   //------------------------------
 
-// Just hold idea from enterMainPage
-  // <li class='eachPost'>
-  //   <p>Post:</p>
-  //   <p>By:</p>
-  //   <div class='post-user'>
-  //   </div>
-  //   Put your comment below here:
-  //   <br>
-  //   <input type='textarea'>
-  // </li>
-  // <li class='eachPost'>
-  //   <p>Post:</p>
-  //   <p>By:</p>
-  //   <div class='post-user'>
-  //   </div>
-  //   Put your comment below here:
-  //   <br>
-  //   <input type='textarea'>
-  // </li>
-  // <li class='eachPost'>
-  //   <p>Post:</p>
-  //   <p>By:</p>
-  //   <div class='post-user'>
-  //   </div>
-  //   Put your comment below here:
-  //   <br>
-  //   <input type='textarea'>
-  // </li>
-  // <li class='eachPost'>
-  //   <p>Post:</p>
-  //   <p>By:</p>
-  //   <div class='post-user'>
-  //   </div>
-  //   Put your comment below here:
-  //   <br>
-  //   <input type='textarea'>
-  // </li>
-  // <li class='eachPost'>
-  //   <p>Post:</p>
-  //   <p>By:</p>
-  //   <div class='post-user'>
-  //   </div>
-  //   Put your comment below here:
-  //   <br>
-  //   <input type='textarea'>
-  // </li>
 
-
-// ${body.questionboard.title[0]}
-
-
-
-
-  //  <p>${Date}</p> for up above here.
-// //<section>
-//  <img src='${pic[0]}'>
-//  <img src='${pic[1]}'>
-//  <img src='${pic[2]}'>
-//  <img src='${pic[3]}'>
-//  <img src='${pic[4]}'>
-//  <img src='${pic[5]}'>
-// </section>
-// <p> ${data.post[index].question} </p>
   $(enterMainPage);
 
   function profileCreation() {
@@ -416,23 +331,7 @@ function backToMainPage() {
   });
 }
 
-// function selectTopic() {
-//   $('.navbox').click(function(e) {
-//     e.preventDefault();
-//     $('.container').html(
-//       `<h3>${this.title}</h3>
-//       <ul>Most recent posts:
-//         <li>${this.data[0]}</li>
-//         <li>${this.data[1]}</li>
-//         <li>${this.data[2]}</li>
-//         <li>${this.data[3]}</li>
-//         <li>${this.data[4]}</li>
-//         <li>${this.data[5]}</li>
-//         <li>${this.data[6]}</li>
-//       </ul>`
-//     )
-//   })
-// }
+
 
 //   MVP
 // -Create User Posts - kinda
