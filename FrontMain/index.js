@@ -74,7 +74,7 @@ function getAllPosts(callback) {
 
 function displayDataList(data) {
   console.log(data);
-  $('#entrySubmit').click(function(e){  //click
+  $('.container').click('#general_board', function(e){  //click
     e.preventDefault();  //click
     $.each(data.questionPosts, function(i, obj){
       $('#usersPosts').append(`<li class='eachPost'>
