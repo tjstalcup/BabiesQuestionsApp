@@ -61,17 +61,21 @@ const posts_centerURL = 'http://localhost:4747/questionPost'
 function getAllPosts(callback) {
   const postsData = {
     url: posts_centerURL,
-    datatype: 'json',
+    dataType: 'json',
     type: 'GET',
     success: callback
   };
   console.log(postsData);
+  //$.ajax(postsData);
+  //getDataReal(postData)
   $.ajax(postsData);
 }
+
+
 function displayDataList(data) {
   console.log(data);
-  $('#entrySubmit').click(function(e){
-    e.preventDefault();
+  $('#entrySubmit').click(function(e){  //click
+    e.preventDefault();  //click
     $.each(data.questionPosts, function(i, obj){
       $('#usersPosts').append(`<li class='eachPost'>
         <ul id="questionData">Post Title: ${obj.title}</ul>
@@ -82,11 +86,14 @@ function displayDataList(data) {
         Put your comment below here:
         <br>
         <input type='textarea'>
+        <button class='deleteButton'>Delete this Post</button>
       </li>`);
   })
-  });
+  }); //click
   // enterMainPage(data);
 }
+
+
 
 function getDataToDisplay(){
   getAllPosts(displayDataList);
@@ -95,10 +102,9 @@ function getDataToDisplay(){
 
 $(getDataToDisplay);
 
+
 //  This is stage of what I wanted after login
 function enterMainPage() {
-  $('#entrySubmit').click(function(e){
-    e.preventDefault();
     $('.container').html(
       `<nav>
         <ul id='nav'>
@@ -110,6 +116,7 @@ function enterMainPage() {
         </ul>
        </nav>
        <button id='postCreation'>My Post Creation</button>
+       <button id='editCreation'>Edit my post!</button>
        <div id='postbox'></div>
        <section id='secondaryContainer'>
        <h3>Your Sharing Center</h3>
@@ -122,12 +129,18 @@ function enterMainPage() {
           Put your comment below here:
           <br>
           <input type='textarea'>
+          <button class='deleteButton'>Delete this Post</button>
         </li>
         </ul>
        </section>
        `
      );
-  });
+
+     $('#general_board').click(function(e){
+      console.log("***general board  clicked");
+      e.preventDefault();
+      enterMainPage();
+    });
     console.log('entered the main page successful');
     // $(reportIssue());
     // $('#usersPosts').html('result here');
@@ -275,7 +288,7 @@ function updatePost(changePost) {
   //------------------------------
 
 
-  $(enterMainPage);
+  //$(enterMainPage);
 
   function profileCreation() {
     $('#signUp').click(function(e) {
@@ -330,6 +343,14 @@ function backToMainPage() {
     $(enterMainPage());
   });
 }
+
+
+$('#entrySubmit').click(function(e){
+
+  console.log("***Entry submit  clicked");
+  e.preventDefault();
+  enterMainPage();
+});
 
 
 
