@@ -111,7 +111,7 @@ function renderMainPage(){
   const newCurrentDate = month + "/" + day + "/" + year;
 
   $('#container-main').html(`
-  <button id='postCreation'>Post Creation</button>
+  <button id='postCreation'>Post Creation<br>Open/Close</button>
   <br>
   <div id='postbox'>
     <h2>Post Creation</h2>
@@ -122,7 +122,7 @@ function renderMainPage(){
       <br>
       Question: <input id="questionData" class='postInfo' type='text' value='' placeholder='Write down a question'>
       <br>
-      content: <textarea class='postInfo' type='text' placeholder='Write down content'></textarea>
+      content: <textarea id='postInfo' type='text' placeholder='Write down content'></textarea>
       <br>
       date: ${newCurrentDate}
       <br>
@@ -215,10 +215,18 @@ function suggestionTab() {
   $('.container').on('click', '#suggestion', function(e){
     e.preventDefault();
     $('#secondaryContainer').html(`
-      <form>
-        Your email please, it is for future following up: <input class='reportbox' type='text' placeholder='Your email?'>
+      <form id='suggestionForm'>
+        Your email please?<br>
+        <input class='reportbox' type='text' placeholder='Your email?'>
         <br>
-        Your Suggestion(s): <textarea class='suggestiontext' placeholder='please type down here'></textarea>
+        it is for future following up
+        <br>
+        <div>----------------------------------------------------------------</div>
+        Your Suggestion(s):
+        <br>
+        <textarea class='suggestiontext' placeholder='please type down here'></textarea>
+        <br>
+        <button>Submit your suggestion</button>
       </form>`)
   });
 }

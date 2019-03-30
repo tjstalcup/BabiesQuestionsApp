@@ -56,6 +56,9 @@ footer {
   border: solid purple;
   margin-right: -4px;
   padding: 5px 6px;
+  /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09BvaCJg-v4kNXoiDUU39He-7v3gZh3XxaceU1mo1VazG7PDR');
+  background-size: 100% 100%;
+  background-repeat: no-repeat; */
 }
 .navBox:hover {
   text-decoration: underline;
@@ -102,18 +105,22 @@ footer {
   width: 300px;
   height: 20px;
   margin: 5px 0;
+  text-align: center;
 }
 .reporttext {
   width: 600px;
-  /* height: 300px; */
+  height: 300px;
   /* text-align: center; */
   resize: none;
   margin: 5px 0;
 }
+#suggestionForm{
+  text-align: center;
+}
 .suggestiontext {
-  width: 600px;
-  height: 300px;
-  /* text-align: center; */
+  width: 500px;
+  height: 200px;
+  text-align: center;
   resize: none;
   margin: 5px 0;
 }
