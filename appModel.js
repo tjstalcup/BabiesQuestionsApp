@@ -40,7 +40,7 @@ const childQuestionSchema = mongoose.Schema({
     content: String,
     childAge: Number,
     foundAnswer: String
-  }
+  },
   // ,
   // id: uuid
 // save later
@@ -52,7 +52,12 @@ return {
   parentName: this.parentName,
   title: this.title,
   zipcode: this.zipcode,
-  question: this.question
+  question:{
+    date: this.question.date,
+    content: this.question.content,
+    childAge: this.question.childAge,
+    foundAnswer: this.question.foundAnswer
+  }
   };
 };
 

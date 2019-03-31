@@ -64,14 +64,21 @@ footer {
   text-decoration: underline;
 }
 #postCreation{
-  background-color: gold;
-  border: solid 2px gray;
-  color: black;
+  /* background-color: gold; */
+  position: absolute;
+  width: 50px;
+  height: auto;
+  /* border: solid 2px gray; */
+  /* color: black; */
   text-align: center;
   text-decoration: none;
   margin-top: 5px;
   padding: 2px;
   border-radius: 5px;
+}
+#postCreation:hover{
+  background-color: gold;
+  border-radius: 10px;
 }
 #editCreation{
   /* background-color: gold;
@@ -90,6 +97,18 @@ footer {
   border: solid lightblue;
   position: absolute;
   left: 450px;
+  z-index: 2;
+  padding: 10px;
+  display: none;
+}
+#postEditBox{
+  width: 380px;
+  height: 250px;
+  background:  white;
+  border: solid lightblue;
+  position: absolute;
+  top: 220px;
+  left: 27%;
   z-index: 2;
   padding: 10px;
   display: none;
