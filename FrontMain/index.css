@@ -66,6 +66,7 @@ footer {
 #postCreation{
   /* background-color: gold; */
   position: absolute;
+  left: 20px;
   width: 50px;
   height: auto;
   /* border: solid 2px gray; */
@@ -101,14 +102,19 @@ footer {
   padding: 10px;
   display: none;
 }
+#buttonSign {
+  position: absolute;
+  left: 15px;
+  top: 178px;
+}
 #postEditBox{
   width: 380px;
   height: 250px;
   background:  white;
   border: solid lightblue;
   position: absolute;
-  top: 220px;
-  left: 27%;
+  top: 138px;
+  left: 33%;
   z-index: 2;
   padding: 10px;
   display: none;

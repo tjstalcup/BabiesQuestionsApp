@@ -18,24 +18,13 @@ function fetchAllPosts() {
   $.ajax(postsData);
 }
 
-//-For fetch User's all posts
-function fetchAllUsersPosts() {
-  const postsData = {
-    url: posts_centerURL,
-    dataType: 'json',
-    type: 'GET',
-    success: renderUserPosts
-  };
-  console.log(postsData);
-  //$.ajax(postsData);
-  //getDataReal(postData)
-  $.ajax(postsData);
-}
-
-
-
 //Call AJAX FRAMEWORK
 function addPost(dataPost) {
+  dataPost.question = {
+    content: dataPost.content,
+    childAge: dataPost.childAge,
+    foundAnswer: dataPost.foundAnswer
+  };
   console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
   $.ajax({
     method: 'POST',
@@ -88,6 +77,7 @@ function updatePost(changePost) {
     method: 'PUT',
     data: changePost,
     success: function(data) {
+      console.log('Post have been edited and repost with id' + changePost);
     }
   });
 }
@@ -114,8 +104,24 @@ function renderPosts(data) {
       <button class='editPost' id='${editButtonId}'>Edit my post!</button>
       <div id='postEditBox'>
       <form id='postEdit'>
-        <fieldset>
-          Testing
+      <fieldset id='postDesign'>
+        <legend>Edit your post</legend>
+          Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
+          <br>
+          Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
+          <br>
+          Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
+          <br>
+          <p>Found your answer?</p>
+            <select id='answer' name='gotAnswer'>
+              <option value=''>Pick one</option>
+              <option value='No'>No</option>
+              <option value='Yes'>Yes</option>
+            </select>
+          <br>
+          <p id='knowWhen'>date: </p>
+          <br>
+          <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
         </fieldset>
       </form>
       </div>
@@ -126,6 +132,7 @@ function renderPosts(data) {
     $('#' + editButtonId).click(function(e){
       e.preventDefault();
       console.log(`Edit called on ${id}`);
+      updatePost(obj.id);
     });
     $('#' + deleteButtonId).click(function(e){
       e.preventDefault();
@@ -150,9 +157,9 @@ function renderMainPage(){
   const newCurrentDate = month + "/" + day + "/" + year;
 
   $('#container-main').html(`
-  <button id='refresh'>Refresh the data</button>
-  <p>Open/Close</p>
+
   <img id='postCreation' src='http://cdn.onlinewebfonts.com/svg/img_504212.png'>
+  <p id='buttonSign'>Open/Close</p>
   <br>
   <div id='postbox'>
     <h2>Post Question</h2>
@@ -405,14 +412,15 @@ function editPost(){
     $('#postEditBox').toggle(``);
   })
 }
-function refreshTheData(){
-  $('#container-main').on('click', "#refresh", function(e){
-    e.preventDefault();
-    console.log("refresh button clicked");
-    location.reload(true);
-  });
-}
-$(refreshTheData);
+// function refreshTheData(){
+//   $('#nav').on('click', "#refresh", function(e){
+//     e.preventDefault();
+//     console.log("refresh button clicked");
+//     document.location.reload(true);
+//     renderMainPage();
+//   });
+// }
+// $(refreshTheData);
 
 
 // $(postUp);
