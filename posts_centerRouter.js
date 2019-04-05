@@ -83,7 +83,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", jsonParser, (req, res) => {
   if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message =
     `Request path id (${req.params.id}) and request body id` + `(${req.body.id}) must match`;
@@ -91,7 +91,9 @@ router.put("/:id", (req, res) => {
     return res.status(400).json({message: message});
   }
   const toUpdate = {};
-  const updateableInputs = ["parentName", "title", "zipcode", "question"];
+  // const question = { "content", "childAge", "foundAnswer"};
+  const updateableInputs = ["id", "parentName", "title", "zipcode", question];
+
 
   updateableInputs.forEach(input => {
     if (input in req.body) {
