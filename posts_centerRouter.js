@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
 
 const { QuestionBoard } = require("./appModel");
 
@@ -83,7 +81,8 @@ router.post("/", (req, res) => {
   });
 });
 
-router.put("/:id", jsonParser, (req, res) => {
+router.put("/:id", (req, res) => {
+  console.log(req.body);
   if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message =
     `Request path id (${req.params.id}) and request body id` + `(${req.body.id}) must match`;

@@ -71,11 +71,12 @@ function deletePost(postId) {
 }
 
 function updatePost(changePost) {
-  console.log('updating post`' + changePost.id + '`');
+  console.log(changePost);
+  console.log('updating post`' + changePost + '`');
   $.ajax({
-    url: posts_centerURL + '/' + changePost.id,
+    url: posts_centerURL + '/' + changePost,
     method: 'PUT',
-    data: changePost,
+    data: {id: changePost},
     success: function(data) {
       console.log('Post have been edited and repost with id' + changePost);
     }
